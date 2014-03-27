@@ -1,0 +1,30 @@
+{
+  "name": "react-selectize",
+  "version": "0.0.1",
+  "authors": [
+    "igor.ovsyannikov <garek@mail.ru>"
+  ],
+  "description": "React wrapper around selectize",
+  "main": "dist/react-selectize.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "selectize",
+    "react",
+    "javascript",
+    "library"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ggarek/react-selectize",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "selectize": "~0.9.0"
+  }
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../bower_components/selectize/dist/css/selectize.css" />
+    <link rel="stylesheet" href="../bower_components/selectize/dist/css/selectize.default.css" />
+
+    <style>
+        .control-group {
+            width: 200px;
+        }
+    </style>
+
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/selectize/dist/js/standalone/selectize.js"></script>
+
+    <script src="../react-0.10.0/build/react.js"></script>
+    <script src="../react-0.10.0/build/JSXTransformer.js"></script>
+
+    <script src="../dist/react-selectize.js"></script>
+</head>
+<body>
+    <!--view-->
+    <div id="example"></div>
+
+    <!--Data stubs-->
+    <script type="text/jsx">
+        /** @jsx React.DOM */
+
+        var CountryService = {
+          getCountryList: function () {
+            return [
+              { name: "Russia", id: 1},
+              { name: "Brazil", id: 2},
+              { name: "Spain", id: 3},
+            ];
+          }
+        };
+
+        var CityService = {
+          _data: {
+            1: [
+              { name: "Moscow", id: 1 },
+              { name: "St.Petersburg", id: 2 },
+              { name: "Smolensk", id: 3 },
+            ],
+            2: [
+              { name: "Rio de Janeiro", id: 4 },
+              { name: "Sao Paulo", id: 5 },
+              { name: "Santa Catarina", id: 6}
+            ],
+            3: [
+              { name: "Madrid", id: 7 },
+              { name: "Salamanca", id: 8 },
+              { name: "Zaragoza", id: 9 }
+            ]
+          },
+
+          getCitiesByCountryId: function (countryId) {
+            return this._data[countryId].slice();
+          }
+        };
+
+        var SightsService = {
+          _data: [
+            { id: 1, cityId: 7, name: "Gran Via" },
+            { id: 2, cityId: 7, name: "El Escorial" },
+            { id: 3, cityId: 1, name: "Kremlin" },
+            { id: 4, cityId: 2, name: "Petergof" },
+            { id: 5, cityId: 4, name: "Cristo Redentor" },
+            { id: 6, cityId: 5, name: "Credicard Hall" },
+          ],
+
+          getSightsByCityId: function (id) {
+            return this._data.filter(function (item) {  return item.cityId == id })
+          },
+
+          getSightsByCityIds: function (ids) {
+            var context = this,
+                result;
+            result = Array.prototype.concat.apply([], ids.map(function (cityId) {
+              return context.getSightsByCityId(cityId);
+            }));
+
+            console.log("Requested sights => ", result);
+
+            return result;
+          }
+        };
+    </script>
+
+    <!--React component-->
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    /* LocationPanel */
+    var LocationPanel = React.createClass({
+
+      getInitialState: function () {
+        return {
+          selectedCountryId: -1,
+          countries: CountryService.getCountryList(),
+          cities: []
+        }
+      },
+
+      handleCountryChanged: function (value) {
+        var countryId = Number(value[0]);
+        this.setState({
+          selectedCountryId: countryId,
+          cities: CityService.getCitiesByCountryId(countryId)
+        });
+      },
+
+      handleCityChanged: function (value) {
+      console.log(value);
+        var ids = value.map(function (id) { return Number(id); });
+
+        this.setState({
+          selectedCityIds: ids,
+          sights: SightsService.getSightsByCityIds(ids)
+        });
+      },
+
+      render: function () {
+        return <div>
+          <ReactSelectize
+            items={this.state.countries}
+            value={this.state.selectedCountryId}
+            onChange={this.handleCountryChanged}
+            selectId="select-country"
+            placeholder="Pick a country.."
+            label="Country:"
+            />
+
+          <ReactSelectize
+            items={this.state.cities}
+            value={this.state.selectedCityIds}
+            selectId="select-cities"
+            placeholder="Pick a city.."
+            label="City:"
+            multiple={true}
+            onChange={this.handleCityChanged}
+            />
+
+          <ReactSelectize
+            items={this.state.sights}
+            selectId="select-sights"
+            placeholder="Pick a sightseeing.."
+            label="Sightseeings:"
+            multiple={true}
+            />
+        </div>
+      }
+    });
+
+    /* Render app */
+    React.renderComponent(<LocationPanel />, document.getElementById('example'));
+    </script>
+</body>
+</html>
