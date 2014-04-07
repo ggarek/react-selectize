@@ -2,11 +2,15 @@
 
 /* React selectize wrapper */
 var ReactSelectize = React.createClass({displayName: 'ReactSelectize',
-  _defaults: {
-    valueField: "id",
-    labelField: "name",
-    searchField: "name",
-    create: false
+
+  getDefaultProps: function () {
+    return {
+      valueField: "id",
+      labelField: "name",
+      searchField: "name",
+      create: false,
+      items: []
+    };
   },
 
   isMultiple: function (props) {
@@ -15,17 +19,16 @@ var ReactSelectize = React.createClass({displayName: 'ReactSelectize',
   },
 
   buildOptions: function () {
-    var o = {},
-      d = this._defaults;
+    var o = {};
 
-    o.valueField = this.props.valueField || d.valueField;
-    o.labelField = this.props.labelField || d.labelField;
-    o.searchField = this.props.searchField || d.searchField;
+    o.valueField = this.props.valueField;
+    o.labelField = this.props.labelField;
+    o.searchField = this.props.searchField;
     if(this.isMultiple(this.props)){
       o.maxItems = this.props.maxItems || null;
     }
-    o.options = this.props.items || [];
-    o.create = this.props.create || d.create;
+    o.options = this.props.items;
+    o.create = this.props.create;
 
     return o;
   },
