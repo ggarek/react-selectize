@@ -10,3 +10,4 @@ I will try to handle it as soon as i can.
 
 #Changelog
 07.04.2014 Fixed issue when selectize`s dropdown was reopenning after onChange event
+10.04.2014 Added ability to pass classes through props ('control-group' class removed)
