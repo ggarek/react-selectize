@@ -98,6 +98,7 @@
         return {
           selectedCountryId: -1,
           countries: CountryService.getCountryList(),
+          isDisabled: false,
           cities: []
         }
       },
@@ -126,6 +127,7 @@
             items={this.state.countries}
             value={this.state.selectedCountryId}
             onChange={this.handleCountryChanged}
+            isDisabled={this.state.isDisabled}
             selectId="select-country"
             placeholder="Pick a country.."
             label="Country:"

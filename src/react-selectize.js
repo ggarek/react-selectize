@@ -75,6 +75,14 @@ var ReactSelectize = React.createClass({
     if(this.props.onChange){
       selectControl.on('change', this.handleChange);
     }
+
+    if (this.props.isDisabled) {
+      this.disableSelectize();
+    }
+  },
+
+  disableSelectize: function() {
+    this.getSelectizeControl().disable();
   },
 
   componentDidMount: function () {
