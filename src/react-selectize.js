@@ -8,6 +8,7 @@ var ReactSelectize = React.createClass({
       valueField: "id",
       labelField: "name",
       searchField: "name",
+      sortField: "id",
       create: false,
       items: []
     };
@@ -24,6 +25,7 @@ var ReactSelectize = React.createClass({
     o.valueField = this.props.valueField;
     o.labelField = this.props.labelField;
     o.searchField = this.props.searchField;
+    o.sortField = this.props.sortField;
     if(this.isMultiple(this.props)){
       o.maxItems = this.props.maxItems || null;
     }

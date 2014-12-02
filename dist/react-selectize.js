@@ -8,6 +8,7 @@ var ReactSelectize = React.createClass({displayName: 'ReactSelectize',
       valueField: "id",
       labelField: "name",
       searchField: "name",
+      sortField: "id",
       create: false,
       items: []
     };
@@ -24,6 +25,7 @@ var ReactSelectize = React.createClass({displayName: 'ReactSelectize',
     o.valueField = this.props.valueField;
     o.labelField = this.props.labelField;
     o.searchField = this.props.searchField;
+    o.sortField = this.props.sortField;
     if(this.isMultiple(this.props)){
       o.maxItems = this.props.maxItems || null;
     }
@@ -87,7 +89,7 @@ var ReactSelectize = React.createClass({displayName: 'ReactSelectize',
 
   render: function () {
     var classes = this.props.classes;
-    return React.DOM.div( {className:classes && classes.length > 0 ? classes.join(' ') : ''}, 
+    return React.DOM.div( {className:classes && classes.length > 0 ? classes.join(' ') : ''},
       React.DOM.label( {for:this.props.selectId}, this.props.label),
       React.DOM.select( {id:this.props.selectId, placeholder:this.props.placeholder})
     )
