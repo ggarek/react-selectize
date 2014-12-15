@@ -103,6 +103,8 @@
       },
 
       handleCountryChanged: function (value) {
+        if(!value) return;
+
         var countryId = Number(value[0]);
         this.setState({
           selectedCountryId: countryId,
@@ -111,7 +113,8 @@
       },
 
       handleCityChanged: function (value) {
-      console.log(value);
+        if(!value) return;
+
         var ids = value.map(function (id) { return Number(id); });
 
         this.setState({
