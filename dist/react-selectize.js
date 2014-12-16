@@ -10,6 +10,7 @@ var ReactSelectize = React.createClass({displayName: 'ReactSelectize',
       searchField: "name",
       sortField: "id",
       create: false,
+      plugins: [],
       items: []
     };
   },
@@ -31,6 +32,7 @@ var ReactSelectize = React.createClass({displayName: 'ReactSelectize',
     }
     o.options = this.props.items;
     o.create = this.props.create;
+    o.plugins = this.props.plugins;
 
     return o;
   },
