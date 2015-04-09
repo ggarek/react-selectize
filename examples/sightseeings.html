@@ -13,8 +13,8 @@
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/selectize/dist/js/standalone/selectize.js"></script>
 
-    <script src="../react-0.10.0/build/react.js"></script>
-    <script src="../react-0.10.0/build/JSXTransformer.js"></script>
+    <script src="../node_modules/react/dist/react.js"></script>
+    <script src="../node_modules/react/dist/JSXTransformer.js"></script>
 
     <script src="../dist/react-selectize.js"></script>
 </head>
@@ -156,7 +156,7 @@
     });
 
     /* Render app */
-    React.renderComponent(<LocationPanel />, document.getElementById('example'));
+    React.render(<LocationPanel />, document.getElementById('example'));
     </script>
 </body>
 </html>

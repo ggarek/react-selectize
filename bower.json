@@ -1,10 +1,10 @@
 {
   "name": "react-selectize",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "authors": [
-    "igor.ovsyannikov <garek@mail.ru>"
+    "igor ovsyannikov <garek@mail.ru>"
   ],
-  "description": "React wrapper around selectize",
+  "description": "React wrapper around Selectize",
   "main": "dist/react-selectize.js",
   "moduleType": [
     "globals"
